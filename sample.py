@@ -28,9 +28,14 @@ parser.add_argument('--cytomine_id_software', dest = "cytomine_id_software")
 parser.add_argument('--cytomine_id_project', dest = "cytomine_id_project")
 parser.add_argument('--test', dest = "test")
 
-argument, others = parser.parse_known_args(sys.argv)
+arguments, others = parser.parse_known_args(sys.argv)
 
-print(argument.test)
+print(arguments.cytomine_host)
+print(arguments.cytomine_public_key)
+print(arguments.cytomine_private_key)
+print(arguments.cytomine_id_software)
+print(arguments.cytomine_id_project)
+print(arguments.test)
 
 cytomine_host = arguments.cytomine_host
 id_project = arguments.cytomine_id_project

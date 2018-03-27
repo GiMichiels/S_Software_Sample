@@ -18,6 +18,7 @@ import sys
 import time
 from cytomine import Cytomine
 from cytomine.models import *
+from argparse import ArgumentParser
 
 parser = argparse.ArgumentParser(description = 'Sample Cytomine Software')
 parser.add_argument('--cytomine_host', dest = cytomine_host, default = 'http://localhost-core')

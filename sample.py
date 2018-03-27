@@ -20,7 +20,7 @@ from cytomine import Cytomine
 from cytomine.models import *
 from argparse import ArgumentParser
 
-parser = argparse.ArgumentParser(description = 'Sample Cytomine Software')
+parser = ArgumentParser(description = 'Sample Cytomine Software')
 parser.add_argument('--cytomine_host', dest = cytomine_host, default = 'http://localhost-core')
 parser.add_argument('--cytomine_public_key', dest = cytomine_public_key, default = "")
 parser.add_argument('--cytomine_private_key', dest = cytomine_private_key, default = "")

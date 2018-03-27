@@ -21,4 +21,4 @@ MAINTAINER Cytomine Tean "support@cytomine.be"
 
 ADD sample.py .
 
-ENTRYPOINT python /sample.py
+ENTRYPOINT ["python", "/sample.py"]

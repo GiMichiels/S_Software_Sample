@@ -21,12 +21,12 @@ from cytomine.models import *
 from argparse import ArgumentParser
 
 parser = ArgumentParser(description = 'Sample Cytomine Software')
-parser.add_argument('--cytomine_host', dest = cytomine_host, default = 'http://localhost-core')
-parser.add_argument('--cytomine_public_key', dest = cytomine_public_key, default = "")
-parser.add_argument('--cytomine_private_key', dest = cytomine_private_key, default = "")
-parser.add_argument('--cytomine_id_software', dest = cytomine_id_software)
-parser.add_argument('--cytomine_id_project', dest = cytomine_id_project)
-parser.add_argument('--test', dest = test)
+parser.add_argument('--cytomine_host', dest = "cytomine_host", default = 'http://localhost-core')
+parser.add_argument('--cytomine_public_key', dest = "cytomine_public_key", default = "")
+parser.add_argument('--cytomine_private_key', dest = "cytomine_private_key", default = "")
+parser.add_argument('--cytomine_id_software', dest = "cytomine_id_software")
+parser.add_argument('--cytomine_id_project', dest = "cytomine_id_project")
+parser.add_argument('--test', dest = "test")
 
 argument, others = parser.parse_known_args(sys.argv)
 

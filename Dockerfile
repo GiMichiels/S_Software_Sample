@@ -14,11 +14,36 @@
 # limitations under the License.
 #
 
-# change later, a lot of useless things
-FROM cytomine/software_router
+FROM cytomine/base:v1.1
 
 MAINTAINER Cytomine Tean "support@cytomine.be"
 
+RUN apt-get update && \
+    apt-get -y install git
+
+RUN wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+RUN bash Miniconda2-latest-Linux-x86_64.sh -b
+
+ENV PATH /root/miniconda2/bin:$PATH
+
+RUN conda create -n cytomine python=3.6
+
+RUN mkdir -p /root/Cytomine/
+
+RUN cd /root/Cytomine/ && \
+    git clone https://github.com/cytomine/Cytomine-python-client.git && \
+    cd Cytomine-python-client/ && \
+    git checkout refactoring
+
+RUN cd /root/Cytomine/Cytomine-python-client/ && \
+    python setup.py build && \
+    python setup.py install
+
+RUN cd /root/Cytomine/ && \
+    git clone https://github.com/cytomine/Cytomine-tools.git &&\
+    cd Cytomine-tools/ && \
+    git checkout tags/v1.1
+
 ADD sample.py .
 
-ENTRYPOINT ["python", "/sample.py"]
+ENTRYPOINT ["python", "sample.py"]

@@ -13,20 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
+import logging
 import sys
 import time
-from cytomine import Cytomine
-from cytomine.models import *
 from argparse import ArgumentParser
 
-parser = ArgumentParser(description = 'Sample Cytomine Software')
-parser.add_argument('--cytomine_host', dest = "cytomine_host", default = 'http://localhost-core')
-parser.add_argument('--cytomine_public_key', dest = "cytomine_public_key", default = "")
-parser.add_argument('--cytomine_private_key', dest = "cytomine_private_key", default = "")
-parser.add_argument('--cytomine_id_software', dest = "cytomine_id_software")
-parser.add_argument('--cytomine_id_project', dest = "cytomine_id_project")
-parser.add_argument('--test', dest = "test")
+from cytomine import CytomineJob
+from cytomine.models import Job
+
+parser = ArgumentParser(description='Sample Cytomine Software')
+parser.add_argument('--cytomine_host', dest="cytomine_host", default='http://localhost-core')
+parser.add_argument('--cytomine_public_key', dest="cytomine_public_key", default="")
+parser.add_argument('--cytomine_private_key', dest="cytomine_private_key", default="")
+parser.add_argument('--cytomine_id_software', dest="cytomine_id_software")
+parser.add_argument('--cytomine_id_project', dest="cytomine_id_project")
+parser.add_argument('--test', dest="test")
 
 arguments, others = parser.parse_known_args(sys.argv)
 
@@ -37,26 +38,21 @@ print(arguments.cytomine_id_software)
 print(arguments.cytomine_id_project)
 print(arguments.test)
 
-cytomine_host = arguments.cytomine_host
-id_project = arguments.cytomine_id_project
+with CytomineJob(arguments.cytomine_host, arguments.cytomine_public_key, arguments.cytomine_private_key,
+                 arguments.cytomine_id_software, arguments.cytomine_id_project, verbose=logging.INFO) as cj:
+    print(cj.current_user)
+    print(cj.job)
 
-connection = Cytomine(arguments.cytomine_host, arguments.cytomine_public_key, arguments.cytomine_private_key, base_path = '/api/', working_path = '/tmp/', verbose = True)
+    cj.job.update(status=Job.RUNNING, progress=0, statusComment="Init...")
+    time.sleep(2)
 
-current_user = connection.get_current_user()
-user_job = current_user
+    cj.job.update(progress=25, statusComment="Launching...")
+    time.sleep(2)
 
-job = connection.get_job(user_job.job)
+    cj.job.update(progress=50, statusComment="Working...")
+    time.sleep(2)
 
-job = connection.update_job_status(job, status = job.RUNNING, progress = 0, status_comment = "Init...")
-time.sleep(2)
+    cj.job.update(progress=75, statusComment="Retrieving results...")
+    time.sleep(2)
 
-job = connection.update_job_status(job, status = job.RUNNING, progress = 25, status_comment = "Launching...")
-time.sleep(2)
-
-job = connection.update_job_status(job, status = job.RUNNING, progress = 50, status_comment = "Working...")
-time.sleep(2)
-
-job = connection.update_job_status(job, status = job.RUNNING, progress = 75, status_comment = "Retrieving results...")
-time.sleep(2)
-
-job = connection.update_job_status(job, status = job.TERMINATED, progress = 100, status_comment = "Job done...")
+    cj.job.update(status=Job.TERMINATED, progress=100, statusComment="Job done...")

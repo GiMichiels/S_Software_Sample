@@ -19,7 +19,7 @@ FROM cytomine/base:v1.1
 MAINTAINER Cytomine Tean "support@cytomine.be"
 
 RUN apt-get update && \
-    apt-get -y install git
+    apt-get -y install git python
 
 RUN wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
 RUN bash Miniconda2-latest-Linux-x86_64.sh -b

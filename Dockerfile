@@ -18,8 +18,13 @@ FROM cytomine/base:v1.1
 
 MAINTAINER Cytomine Tean "support@cytomine.be"
 
-RUN apt-get update && \
-    apt-get -y install apt-transport-https \
+RUN wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+RUN bash Miniconda2-latest-Linux-x86_64.sh -b
+
+ENV PATH /root/miniconda2/bin:$PATH
+
+RUN apt-get -y update && apt-get install -y \
+    apt-transport-https \
     ca-certificates \
     curl \
     git \
@@ -31,12 +36,7 @@ RUN apt-get update && \
     make \
     zip
 
-RUN wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
-RUN bash Miniconda2-latest-Linux-x86_64.sh -b
-
-ENV PATH /root/miniconda2/bin:$PATH
-
-RUN conda create -n cytomine python=3.6
+RUN conda create -n cytomine python=3.6 shapely opencv scikit-learn pillow joblib cython
 
 RUN mkdir -p /root/Cytomine/
 

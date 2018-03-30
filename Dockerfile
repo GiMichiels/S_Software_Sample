@@ -19,7 +19,17 @@ FROM cytomine/base:v1.1
 MAINTAINER Cytomine Tean "support@cytomine.be"
 
 RUN apt-get update && \
-    apt-get -y install git python
+    apt-get -y install apt-transport-https \
+    ca-certificates \
+    curl \
+    git \
+    g++ \
+    language-pack-en-base \
+    libglib2.0-0 \
+    lxc \
+    iptables \
+    make \
+    zip
 
 RUN wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
 RUN bash Miniconda2-latest-Linux-x86_64.sh -b

@@ -18,10 +18,13 @@ FROM cytomine/base:v1.1
 
 MAINTAINER Cytomine Tean "support@cytomine.be"
 
-RUN wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
-RUN bash Miniconda2-latest-Linux-x86_64.sh -b
+# Miniconda Python environment
+RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+RUN bash Miniconda3-latest-Linux-x86_64.sh -b
 
-ENV PATH /root/miniconda2/bin:$PATH
+ENV PATH /root/miniconda3/bin:$PATH
+
+RUN conda install opencv shapely requests numpy --yes
 
 RUN apt-get -y update && apt-get install -y \
     apt-transport-https \
@@ -35,8 +38,6 @@ RUN apt-get -y update && apt-get install -y \
     iptables \
     make \
     zip
-
-RUN conda create -n cytomine python=3.6 shapely opencv scikit-learn pillow joblib cython
 
 RUN mkdir -p /root/Cytomine/
 

@@ -44,6 +44,6 @@ RUN cd /root/Cytomine/ && \
     cd Cytomine-tools/ && \
     git checkout tags/v1.1
 
-ADD sample.py .
+ADD sample.py /
 
-ENTRYPOINT ["python", "sample.py"]
+ENTRYPOINT ["python", "/sample.py"]

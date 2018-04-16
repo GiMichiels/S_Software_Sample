@@ -32,6 +32,15 @@
             "set-by-server": false,
             "type": "string",
             "value-key": "[TEST]"
+        },
+        {
+            "id": "time",
+            "name": "time",
+            "default-value": "12:00",
+            "optional": true,
+            "set-by-server": false,
+            "server-parameter": true,
+            "type": "string"
         }
     ],
     "invocation-schema": {

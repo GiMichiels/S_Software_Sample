@@ -19,7 +19,7 @@ import time
 from argparse import ArgumentParser
 
 from cytomine import CytomineJob
-from cytomine.models import Job
+from cytomine.models import Job, ImageInstance
 
 parser = ArgumentParser(description='Sample Cytomine Software')
 parser.add_argument('--cytomine_host', dest="cytomine_host", default='http://localhost-core')

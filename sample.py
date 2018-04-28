@@ -55,4 +55,5 @@ with CytomineJob(arguments.cytomine_host, arguments.cytomine_public_key, argumen
     cj.job.update(progress=75, statusComment="Retrieving results...")
     time.sleep(2)
 
+    
     cj.job.update(status=Job.TERMINATED, progress=100, statusComment="Job done...")

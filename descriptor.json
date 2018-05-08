@@ -1,0 +1,94 @@
+{
+    "command-line": "[CYTOMINE_HOST] [CYTOMINE_PUBLIC_KEY] [CYTOMINE_PRIVATE_KEY] [CYTOMINE_ID_PROJECT] [CYTOMINE_ID_SOFTWARE] [TEST_NUMBER] [TEST_STRING] [TEST_BOOLEAN] [TEST_DATE]",
+    "container-image": {
+        "image": "gmichiels/w_spotdetection-icy",
+        "index": "docker",
+        "type": "singularity"
+    },
+    "default-processing-server-name": "local-container",
+    "description": "SpotDetection-Icy",
+    "inputs": [
+        {
+            "id": "cytomine_id_software",
+            "name": "cytomine_id_software",
+            "optional": false,
+            "set-by-server": true,
+            "type": "number",
+            "value-key": "[CYTOMINE_ID_SOFTWARE]"
+        },
+        {
+            "id": "cytomine_id_project",
+            "name": "cytomine_id_project",
+            "optional": false,
+            "set-by-server": true,
+            "type": "number",
+            "value-key": "[CYTOMINE_ID_PROJECT]"
+        },
+        {
+            "id": "test_number",
+            "name": "test_number",
+            "default-value": 40,
+            "optional": true,
+            "set-by-server": false,
+            "type": "number",
+            "value-key": "[TEST_NUMBER]",
+            "minimum": 1,
+            "maximum": 100,
+            "equals": 50,
+            "in": "2ð50ð4"
+        },
+        {
+            "id": "test_string",
+            "name": "test_string",
+            "default-value": "test",
+            "optional": true,
+            "set-by-server": false,
+            "type": "string",
+            "value-key": "[TEST_STRING]",
+            "minimum": 2,
+            "maximum": 8,
+            "equals": "teststr",
+            "in": "aaaðbbbðccc"
+        },
+        {
+            "id": "test_boolean",
+            "name": "test_boolean",
+            "default-value": true,
+            "optional": true,
+            "type": "boolean",
+            "value-key": "[TEST_BOOLEAN]",
+            "equals": true
+        },
+        {
+            "id": "time",
+            "name": "time",
+            "default-value": "00:10:00",
+            "optional": false,
+            "set-by-server": false,
+            "type": "date",
+            "minimum": "00:05:00",
+            "maximum": "00:15:00",
+            "equals": "00:06:10",
+            "in": "00:01:00ð00:03:40"
+        }
+    ],
+    "invocation-schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "additionalProperties": false,
+        "dependencies": {},
+        "description": "Invocation schema for cytomine-template.",
+        "properties": {
+            "cytomine_host": {
+                "type": "string"
+            }
+        },
+        "required": [
+            "cytomine_host"
+        ],
+        "title": "Cytomine-template.invocationSchema",
+        "type": "object"
+    },
+    "name": "SpotDetection-Icy",
+    "schema-version": "0.5",
+    "tool-version": "1.0"
+}
